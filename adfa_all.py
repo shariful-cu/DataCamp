@@ -10,18 +10,20 @@ Created on Tue Jun 19 23:13:02 2018
 def read_all_seq (hm_path):
     
     """
-    read all the sequences from each text files and return a list of array
+    Input: 
+        hm_path: path or directory
     
+    Descritption:
+        read all the text files located at the given directory (var: hm_path)
+    
+    Output: 
+        return a list of numpy array (var: all_seq)
     """
     
     import glob
-#    import numpy as np
     
     txt_files = glob.glob(hm_path)
-    
     all_seq = []
- 
-    
     for i in txt_files:
         infile=open(i)
         one_seq=infile.readline()
@@ -30,11 +32,10 @@ def read_all_seq (hm_path):
         one_seq = list(map(int, one_seq))
         all_seq.append(np.array(one_seq))
         infile.close()
-            
     return all_seq
 #===============end of read_all_seq()==================
 
-#===============main adfa_all()==================
+#===============reading train, test(normal), and test(attack) sequences=====
 import glob
 import numpy as np
 import csv
@@ -60,7 +61,7 @@ for a_dir in list_dir:
         one_seq = np.concatenate(list_seqs, axis=0 )
         test_attack_seqs.append(one_seq)
         
-#===============main end of adfa_all()==================
+#===============end of reading==================
         
         
 #==creating dictionary (key, value) where value is the document frequency ()===
@@ -85,9 +86,9 @@ with open(filePath, 'w') as csvfile:
     writer.writerow(dict_df)
     csvfile.close()
 print("Writing df is completed") 
+#==Ebd of creating dictionary=========
 
-
-# writing tf_idf (TRAINING SET)
+#===========use dict_df for computing and writing tf_idf (TRAINING SET)======
 filePath = '/Users/Shariful/Documents/DataCamp/ADFA-LD(tf-idf)/train_normal.csv'
 with open(filePath, 'w') as csvfile:
     writer = csv.DictWriter(csvfile, fieldnames = dict_df.keys())
@@ -101,7 +102,7 @@ with open(filePath, 'w') as csvfile:
     csvfile.close()  
 print("Writing tf-idf for training set is completed")
 
-# writing tf_idf (TESTING Normal SET)
+#===========use dict_df for computing and writing tf_idf (TESTING Normal SET)==
 filePath = '/Users/Shariful/Documents/DataCamp/ADFA-LD(tf-idf)/test_normal.csv'
 with open(filePath, 'w') as csvfile:
     writer = csv.DictWriter(csvfile, fieldnames = dict_df.keys())
@@ -116,7 +117,7 @@ with open(filePath, 'w') as csvfile:
 print("Writing tf-idf for testing normal set is completed")    
 
 
-# writing tf_idf (TESTING Attack SET)
+#===========use dict_df for computing and writing tf_idf (TESTING Attack SET)==
 filePath = '/Users/Shariful/Documents/DataCamp/ADFA-LD(tf-idf)/test_attack.csv'
 with open(filePath, 'w') as csvfile:
     writer = csv.DictWriter(csvfile, fieldnames = dict_df.keys())
@@ -128,4 +129,4 @@ with open(filePath, 'w') as csvfile:
         vec_trn.update({key: dict_df[key] * (vec_trn[key] / len(seq))  for key in vec_trn.keys()})
         writer.writerow(vec_trn)
     csvfile.close()  
-print("Writing tf-idf for testing attack set is completed") 
+print("Writing tf-idf for testing attack set is completed")

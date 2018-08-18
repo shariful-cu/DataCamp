@@ -13,8 +13,8 @@ np_weight = np.array([65.4, 59.2, 63.6, 88.4, 68.7])
 meas = [np_height, np_weight]
 
 # printing values same as like in 2d array
-for var in meas :
-    print(var)
+#for var in meas :
+#    print(var)
     
     
 # printing values based on order of index in 2d array

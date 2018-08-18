@@ -22,3 +22,14 @@ for i in txt_files:
     
     
 dd_int = np.array(a)
+
+
+nums = [3, 4, 5]
+
+square_all = map(lambda num: num ** 2, nums)
+
+print(list(square_all))
+
+
+for i in range(8,13):
+    print(i)
