@@ -16,6 +16,7 @@ from keras.models import load_model
 # Import the SGD optimizer
 from keras.optimizers import SGD
 from keras.callbacks import EarlyStopping
+#from keras.models import LSTM
 
 
 #preparing data
@@ -31,6 +32,12 @@ lab_test = pd.concat([pd.DataFrame([0] * len(test_nml)), pd.DataFrame([1] * 20)]
 
 predictors = df_train.as_matrix()
 n_cols = predictors.shape[1]
+
+
+
+#analysis
+
+
 
 # Convert the target to categorical: target
 target = to_categorical(lab_train)
@@ -53,8 +60,8 @@ def get_new_model(input_shape = (n_cols,)):
 
 
 # Create list of learning rates: lr_to_test
-#lr_to_test = [0.000001, 0.01, 1]
-lr_to_test = [0.01]
+lr_to_test = [0.000001, 0.01, 1]
+#lr_to_test = [0.01]
 
 early_stopping_monitor = EarlyStopping(patience=2)
 
@@ -73,28 +80,35 @@ for lr in lr_to_test:
     
     # Fit the model
     model.fit(predictors, target, validation_split = 0.3, callbacks = [early_stopping_monitor], epochs=10)
-#
-#
-##compile & fit the model
-#optimiz
-## Compile the model
-#model.compile(optimizer = 'sgd', loss = 'categorical_crossentropy', metrics = ['accuracy'])
-#
-## Fit the model
-#model.fit(predictors, target)
-
-##save the model
-#filePath = '/Users/Shariful/Documents/DataCamp/ADFA-LD(tf-idf)/model_dl_2hl.h5'
-#model.save(filePath)
-#
-##load the model
-#my_model = load_model(filePath)
-#
-## Calculate predictions: predictions
-#predictions = model.predict(df_test)
-#
-## Calculate predicted probability of survival: predicted_prob_true
-#predicted_prob_true = predictions[:,1]
-#
-### print predicted_prob_true
-##print(predicted_prob_true)
+# =============================================================================
+# =============================================================================
+# =============================================================================
+   #
+   #
+   ##compile & fit the model
+   #optimiz
+   ## Compile the model
+#   model.compile(optimizer = 'sgd', loss = 'categorical_crossentropy', metrics = ['accuracy'])
+   #
+   ## Fit the model
+#   model.fit(predictors, target)
+   
+   ##save the model
+#   filePath = '/Users/Shariful/Documents/DataCamp/ADFA-LD(tf-idf)/model_dl_2hl.h5'
+#   model.save(filePath)
+   #
+   ##load the model
+#   my_model = load_model(filePath)
+   #
+   ## Calculate predictions: predictions
+#   predictions = model.predict(df_test)
+   #
+   ## Calculate predicted probability of survival: predicted_prob_true
+   #predicted_prob_true = predictions[:,1]
+   #
+   ### print predicted_prob_true
+   ##print(predicted_prob_true)
+   =============================================================================
+# =============================================================================
+# 
+# =============================================================================
