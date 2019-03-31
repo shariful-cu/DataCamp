@@ -24,6 +24,7 @@ trn_nml = pd.read_csv('/Users/Shariful/Documents/DataCamp/ADFA-LD(tf-idf)/train_
 test_atk = pd.read_csv('/Users/Shariful/Documents/DataCamp/ADFA-LD(tf-idf)/test_attack.csv')
 test_nml = pd.read_csv('/Users/Shariful/Documents/DataCamp/ADFA-LD(tf-idf)/test_normal.csv')
 
+
 df_train = pd.concat([trn_nml, test_atk.head(40)], ignore_index=True)
 lab_train = pd.concat([pd.DataFrame([0] * len(trn_nml)), pd.DataFrame([1] * 40)], ignore_index=True)
 
